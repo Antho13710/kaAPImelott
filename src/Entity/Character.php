@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CharacterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CharacterRepository::class)
@@ -15,46 +16,55 @@ class Character
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("characters_get")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups("characters_get")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("characters_get")
      */
     private $nickname;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("characters_get")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Groups("characters_get")
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups("characters_get")
      */
     private $actor;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("characters_get")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("characters_get")
      */
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=membership::class, inversedBy="characters")
+     * @ORM\ManyToOne(targetEntity=Membership::class, inversedBy="characters")
+     * @Groups("characters_get")
      */
     private $membership;
 

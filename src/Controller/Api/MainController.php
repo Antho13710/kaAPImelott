@@ -11,8 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * Affiche tout les personnages par ordre alphabétique
+     * Display all characters order by alpha
      * @Route("/api/characters", name="api_list", methods="GET")
+     * @param CharacterRepository $characterRepository
+     * @return Response
      */
     public function getAll(CharacterRepository $characterRepository): Response
     {
@@ -22,17 +24,18 @@ class MainController extends AbstractController
     }
 
     /**
-     * Affiche un personnage
+     * Display one character
      * @Route("/api/characters/{id}", name="api_show", methods="GET")
+     * @param Character|null $character
+     * @return Response
      */
     public function show(Character $character = null): Response
     {
-        if($character === null)
-        {   
-            // Si character n'existe pas retourne une erreur 404 JSON
+        if ($character === null) {
             return $this->json(['message'=>'C\'est pas faux !'], Response::HTTP_NOT_FOUND);
         }
 
         return $this->json($character, Response::HTTP_OK, [], ['groups' => 'characters_get']);
     }
 }
+
